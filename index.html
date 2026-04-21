@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chatbot UI</title>
+</head>
+<body>
+
+<h2>Women Crime Chatbot</h2>
+
+<input type="text" id="msg" placeholder="Type message">
+<button onclick="send()">Send</button>
+
+<p id="response"></p>
+
+<script>
+async function send() {
+  const message = document.getElementById("msg").value;
+
+  const res = await fetch("http://localhost:3000/chat", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ message })
+  });
+
+  const data = await res.json();
+  document.getElementById("response").innerText = data.reply;
+}
+</script>
+
+</body>
+</html>
